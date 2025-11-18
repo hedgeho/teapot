@@ -61,7 +61,7 @@ if __name__ == '__main__':
     dst, identity = create_rns_dest(os.getenv("RNS_CONFIGDIR"), os.getenv("NODE_IDENTITY_PATH"))
 
     ANNOUNCE_NAME = os.getenv("ANNOUNCE_NAME", "teapot-dev")
-    app.scheduler.every(20).seconds.do(
+    app.scheduler.every(10).minutes.do(
         lambda: logging.getLogger("announce").debug(
             "announce with data %s", ANNOUNCE_NAME
         )
