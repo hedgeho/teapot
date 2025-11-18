@@ -2,7 +2,6 @@ import logging
 import os
 import time
 
-from config import NODE_IDENTITY_PATH, RNS_CONFIGDIR, ANNOUNCE_NAME
 from modules.html2mu.html2mu import convert_html_to_markdown, webpage_to_micron
 from modules.nomadapi import NomadAPI
 from modules.nomadapi.app import Config, create_rns_dest
@@ -58,9 +57,11 @@ def browser(r: Request):
     return render_template('browser.mu', dict())
 
 if __name__ == '__main__':
-    dst, identity = create_rns_dest(RNS_CONFIGDIR, NODE_IDENTITY_PATH)
+    assert os.getenv("RNS_CONFIGDIR") is not None
+    dst, identity = create_rns_dest(os.getenv("RNS_CONFIGDIR"), os.getenv("NODE_IDENTITY_PATH"))
 
-    app.scheduler.every(10).minutes.do(
+    ANNOUNCE_NAME = os.getenv("ANNOUNCE_NAME", "teapot-dev")
+    app.scheduler.every(20).seconds.do(
         lambda: logging.getLogger("announce").debug(
             "announce with data %s", ANNOUNCE_NAME
         )

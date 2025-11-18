@@ -9,7 +9,6 @@ import RNS
 import schedule
 from jinja2 import FileSystemLoader, Environment
 
-from config import STORAGE_PATH
 from modules.nomadapi.context import init_context
 from modules.nomadapi.exceptions import DoubleHandlerRegistration
 from modules.nomadapi.handlers.exception_handler import (
@@ -26,7 +25,7 @@ class Config:
     templates_dir: str = field(default="templates")
     disable_templates: bool = field(default=False)
     store: AbstractStore = field(
-        default=JsonFileStore(os.path.join(STORAGE_PATH, "api_user_data.json"))
+        default=JsonFileStore(os.path.join(os.getenv("STORAGE_PATH"), "api_user_data.json"))
     )
 
     enable_propagation_node: bool = field(default=False)

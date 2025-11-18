@@ -1,0 +1,16 @@
+services:
+  teapot:
+    build: .
+#    image: ghcr.io/hedgeho/bluesky_playground:latest
+    container_name: teapot
+    restart: unless-stopped
+    environment:
+      STORAGE_PATH: /app/teapot/nomadapi_storage  # nomadapi storage
+      RNS_CONFIGDIR: /app/teapot/.reticulum
+      NODE_IDENTITY_PATH: /app/teapot/.nomadnetwork/storage/identity
+      ANNOUNCE_NAME: "teapot-dev"
+    ports:
+      - "4242:4242"
+    volumes:
+      - ./teapot/.nomadnetwork:/app/teapot/.nomadnetwork
+      - ./teapot/nomadapi_storage:/app/teapot/nomadapi_storage
