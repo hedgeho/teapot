@@ -1,0 +1,24 @@
+name: Build & deploy to ghcr
+
+# Use github container registry to push to server
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to GHCR, build and push
+        run: |
+          docker login --username ${{ github.actor }} --password ${{ secrets.GH_PAT }} ghcr.io
+          docker build -t ghcr.io/${{ github.repository }}:latest .
+
+          docker push ghcr.io/${{ github.repository }}:latest
