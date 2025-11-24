@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up git submodules
+        run: git submodule update --init --recursive
+
       - name: Login to GHCR, build and push
         run: |
           docker login --username ${{ github.actor }} --password ${{ secrets.GH_PAT }} ghcr.io
