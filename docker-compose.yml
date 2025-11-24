@@ -4,13 +4,27 @@ services:
 #    image: ghcr.io/hedgeho/bluesky_playground:latest
     container_name: teapot
     restart: unless-stopped
+
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+#    user: "1000:1000"  # run as non-root user  # commented out, raw sockets probably need root
+
     environment:
       STORAGE_PATH: /app/teapot/nomadapi_storage  # nomadapi storage
       RNS_CONFIGDIR: /app/teapot/.reticulum
       NODE_IDENTITY_PATH: /app/teapot/.nomadnetwork/storage/identity
       ANNOUNCE_NAME: "teapot-dev"
-    ports:
-      - "4242:4242"
+      ICMP_TUNNEL_LOG_FILE: /app/teapot/icmp/icmp_tunnel.log
+      UV_CACHE_DIR: /tmp/uv-cache  # Set cache to writable location
+#    ports:
+#      - "4242:4242"  # omitted due to network mode = host
     volumes:
       - ./teapot/.nomadnetwork:/app/teapot/.nomadnetwork
       - ./teapot/nomadapi_storage:/app/teapot/nomadapi_storage
+      - ./teapot/icmp:/app/teapot/icmp

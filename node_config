@@ -121,8 +121,8 @@ respond_to_probes = Yes
 
   [[ICMP Interface]]
     type = PipeInterface
-    enabled = False
-    command = uv run python /root/comms_node/rns-over-icmp/icmp_tunnel.py server --iface eth0
+    enabled = yes
+    command = uv run python ./modules/rns-over-icmp/icmp_tunnel.py server --iface eth0
 
     # Optional: delay before respawn in seconds
     respawn_delay = 2

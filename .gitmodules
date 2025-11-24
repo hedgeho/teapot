@@ -1,3 +1,6 @@
 [submodule "modules/html2mu"]
 	path = modules/html2mu
 	url = https://github.com/hedgeho/html2mu
+[submodule "modules/rns-over-icmp"]
+	path = modules/rns-over-icmp
+	url = https://github.com/matvik22000/rns-over-icmp
