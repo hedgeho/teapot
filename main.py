@@ -45,7 +45,13 @@ def web(r: Request):
             url = 'https://' + url  # default to https
 
         t0 = time.time()
-        mu = webpage_to_micron(url)
+        try:
+            mu = webpage_to_micron(url)
+        except Exception as e:
+            mu = f"error: {str(e)}"
+
+            # Log the full stack trace for debugging
+            logging.exception(f"Error processing URL {url} for identity {id}", exc_info=e)
 
         log_usage(id, url, t0)
         return mu
