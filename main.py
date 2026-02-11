@@ -18,7 +18,7 @@ def index(r: Request):
     return render_template('index.mu', dict())
 
 @app.request('/page/links.mu')
-def links(r: Request):
+def links(_: Request):
     return render_template('links.mu', dict())
 
 def log_usage(id, url, t0):
