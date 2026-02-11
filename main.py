@@ -25,7 +25,10 @@ def log_usage(id, url, t0):
     formatted_time = time.strftime('%Y-%m-%d %H:%M:%S %Z', time.localtime())
     print(f"{formatted_time}: {id=} {url=}, {time.time() - t0:.2f}s")
 
-    log_file = 'usage_log.csv'
+    log_dir = os.getenv('LOGS_PATH', '/app/teapot/logs')
+    os.makedirs(log_dir, exist_ok=True)
+    log_file = os.path.join(log_dir, 'usage_log.csv')
+
     if not os.path.exists(log_file):
         with open(log_file, 'w') as f:
             f.write('timestamp,identity,url,duration\n')
