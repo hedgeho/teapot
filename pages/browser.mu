@@ -17,7 +17,7 @@
 
 Browse external internet without leaving reticulum!
 
-`B444`<30|url`https://news.ycombinator.com>`b
+`B444`<30|url`https://lobster.rs/>`b
 `Ffff`B222`[ GO `:/page/web.mu`*]`b`f
 (buttons look better in MeshChat)
 
