@@ -2,7 +2,7 @@ import logging
 import os
 import time
 
-from modules.html2mu.html2mu import convert_html_to_markdown, webpage_to_micron
+from modules.html2mu.html2mu import webpage_to_micron
 from modules.nomadapi import NomadAPI
 from modules.nomadapi.app import Config, create_rns_dest
 from modules.nomadapi.handlers import Request, render_template
